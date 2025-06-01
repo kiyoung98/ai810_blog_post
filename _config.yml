@@ -1,3 +1,4 @@
+baseurl: "/ai810_blog_post"
 markdown: kramdown
 kramdown:
   input: GFM
