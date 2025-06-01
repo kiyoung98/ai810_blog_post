@@ -5,15 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{{ page.title | default: site.title }}</title>
 
-    <!-- (기존 KaTeX / 기타 CSS/JS) -->
+    <!-- KaTeX CSS·JS 불러오기 -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css"
+      integrity="sha384-…(생략)…"
+      crossorigin="anonymous"
     />
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js"
+      integrity="sha384-…(생략)…"
+      crossorigin="anonymous"
+    ></script>
     <script
       defer
       src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js"
+      integrity="sha384-…(생략)…"
+      crossorigin="anonymous"
       onload="renderMathInElement(document.body, {
         delimiters: [
           { left: '\\[', right: '\\]', display: true },
@@ -21,47 +30,59 @@
           { left: '\\(', right: '\\)', display: false },
           { left: '$', right: '$', display: false }
         ],
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        skipTags: ['script','noscript','style','textarea','pre','code']
       });"
     ></script>
 
-    <!-- ↓ 여기에 아래 CSS 코드를 추가하세요 ↓ -->
+    <!-- 추가할 CSS -->
     <style>
-      /* 1) 본문(content) 안의 모든 이미지(<img>)를 가운데 정렬하고 크기를 줄여줍니다 */
-      .markdown-body img,
-      .post-content img,
-      img {
+      /*── 본문 너비(폭) 및 좌우 여백 설정 ──*/
+      .post-container {
+        max-width: 800px;    /* 본문 최대 너비 (예: 800px) */
+        margin: 0 auto;      /* 좌우 자동 중앙 정렬 */
+        padding: 0 1.5em;    /* 좌우 패딩: 화면이 좁아져도 책처럼 여백 확보 */
+        box-sizing: border-box;
+      }
+      body {
+        background-color: #fff;
+        /* 필요하다면 폰트 계열·크기도 함께 지정 가능 */
+        /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans KR', sans-serif; */
+      }
+
+      /*── 이미지 스타일 (가운데 정렬 + 크기 조정) ──*/
+      .post-container img {
         display: block;
-        margin: 1.5em auto;    /* 위아래 1.5em 여백, 좌우 중앙 정렬 */
-        max-width: 75%;        /* 원본 너비의 75%를 넘지 않도록 제한 */
-        height: auto;          /* 비율 유지 */
+        margin: 1.5em auto;
+        max-width: 75%;
+        height: auto;
+        border: 1px solid #ddd;
+        border-radius: 4px;
       }
 
-      /* 2) Markdown에서 '######' 으로 작성한 캡션(h6)을 가운데 정렬하고 글자 크기를 조절 */
-      .markdown-body h6,
-      .post-content h6,
-      h6 {
-        text-align: center;
-        font-size: 0.9em;      /* 본문보다 약간 작은 크기 */
-        color: #555;           /* 약간 옅은 회색 */
-        margin-top: 0.5em;     /* 이미지와 캡션 사이에 약간 여백 */
-        margin-bottom: 1.5em;  /* 캡션 아래에 약간 여백 */
-      }
-
-      /* (선택) h6가 아닌, 'caption' 용 클래스를 따로 지정했다면 다음과 같이 스타일링해도 됩니다.
-      .caption {
+      /*── 캡션 스타일 (h6로 작성했을 때) ──*/
+      .post-container h6 {
         text-align: center;
         font-size: 0.9em;
         color: #555;
         margin-top: 0.5em;
         margin-bottom: 1.5em;
       }
-      */
-    </style>
-    <!-- ↑ 여기까지 CSS 추가 ↑ -->
 
+      /*── 코드 블록, 표, 기타 요소가 화면을 넘지 않도록──*/
+      .post-container pre,
+      .post-container code,
+      .post-container table {
+        max-width: 100%;
+        overflow-x: auto;
+      }
+    </style>
+    <!-- 여기까지 CSS -->
   </head>
+
   <body>
-    {{ content }}
+    <!-- 본문을 이 div로 감싸면 최대 너비가 800px로 고정되고, 좌우로 패딩(1.5em)과 자동 중앙정렬이 적용됩니다. -->
+    <div class="post-container">
+      {{ content }}
+    </div>
   </body>
 </html>
