@@ -1,37 +1,67 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{{ page.title | default: site.title }}</title>
-  <!-- (기존 CSS/메타 태그 등) -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ page.title | default: site.title }}</title>
 
-  <!-- 1) KaTeX CSS 불러오기 -->
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css"
-  />
-  
-  <script
-    defer
-    src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js"
-  ></script>
-  
-  <script
-    defer
-    src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js"
-    onload="renderMathInElement(document.body, {
-      delimiters: [
-        { left: '\\[', right: '\\]', display: true },
-        { left: '$$',  right: '$$', display: true },
-        { left: '\\(', right: '\\)', display: false },
-        { left: '$',   right: '$',   display: false }
-      ],
-      skipTags: ['script','noscript','style','textarea','pre','code']
-    });"
-  ></script>
-</head>
-<body>
-  {{ content }}
-</body>
+    <!-- (기존 KaTeX / 기타 CSS/JS) -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css"
+    />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js"
+      onload="renderMathInElement(document.body, {
+        delimiters: [
+          { left: '\\[', right: '\\]', display: true },
+          { left: '$$', right: '$$', display: true },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '$', right: '$', display: false }
+        ],
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      });"
+    ></script>
+
+    <!-- ↓ 여기에 아래 CSS 코드를 추가하세요 ↓ -->
+    <style>
+      /* 1) 본문(content) 안의 모든 이미지(<img>)를 가운데 정렬하고 크기를 줄여줍니다 */
+      .markdown-body img,
+      .post-content img,
+      img {
+        display: block;
+        margin: 1.5em auto;    /* 위아래 1.5em 여백, 좌우 중앙 정렬 */
+        max-width: 75%;        /* 원본 너비의 75%를 넘지 않도록 제한 */
+        height: auto;          /* 비율 유지 */
+      }
+
+      /* 2) Markdown에서 '######' 으로 작성한 캡션(h6)을 가운데 정렬하고 글자 크기를 조절 */
+      .markdown-body h6,
+      .post-content h6,
+      h6 {
+        text-align: center;
+        font-size: 0.9em;      /* 본문보다 약간 작은 크기 */
+        color: #555;           /* 약간 옅은 회색 */
+        margin-top: 0.5em;     /* 이미지와 캡션 사이에 약간 여백 */
+        margin-bottom: 1.5em;  /* 캡션 아래에 약간 여백 */
+      }
+
+      /* (선택) h6가 아닌, 'caption' 용 클래스를 따로 지정했다면 다음과 같이 스타일링해도 됩니다.
+      .caption {
+        text-align: center;
+        font-size: 0.9em;
+        color: #555;
+        margin-top: 0.5em;
+        margin-bottom: 1.5em;
+      }
+      */
+    </style>
+    <!-- ↑ 여기까지 CSS 추가 ↑ -->
+
+  </head>
+  <body>
+    {{ content }}
+  </body>
 </html>
