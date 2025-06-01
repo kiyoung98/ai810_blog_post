@@ -30,12 +30,22 @@
     crossorigin="anonymous"
     onload="renderMathInElement(document.body, {
       delimiters: [
-        {left: '$$', right: '$$', display: true},
-        {left: '$',  right: '$',  display: false}
+        // 추가: \[ \] 로 감싼 블록 수식도 처리
+        { left: '\\[', right: '\\]', display: true },
+  
+        // 기존: $$ $$ 블록 수식
+        { left: '$$',  right: '$$', display: true },
+  
+        // 추가: \( \) 인라인 수식도 처리
+        { left: '\\(', right: '\\)', display: false },
+  
+        // 기존: $ $ 인라인 수식
+        { left: '$',   right: '$',   display: false }
       ],
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      skipTags: ['script','noscript','style','textarea','pre','code']
     });"
   ></script>
+
 </head>
 <body>
   {{ content }}
