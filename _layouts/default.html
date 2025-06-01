@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ page.title | default: site.title }}</title>
+  <!-- (기존 CSS/메타 태그 등) -->
+
+  <!-- 1) KaTeX CSS 불러오기 -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css"
+    integrity="sha384-vZTGvPlgk1C51B0M9zM_PA6nWXpGvao6FvJPkPPjpM+IhT05c6nwp4v+DXi6c6Hy"
+    crossorigin="anonymous"
+  />
+
+  <!-- 2) KaTeX JS(Core) 불러오기 -->
+  <script
+    defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js"
+    integrity="sha384-I0PsRLp7oP/d+MEPgeeV+VECRvI1FQHTY9cPbY7IfF+xDo6IWkXlTFVtE55d6LGi"
+    crossorigin="anonymous"
+  ></script>
+
+  <!-- 3) KaTeX Auto-render Extension -->
+  <script
+    defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js"
+    integrity="sha384-mll67QQ4GkN4FhW2eereIbj/tNqliCb7f4+iA7kujXsYZiXkQqL9xB+0W4xcX1"
+    crossorigin="anonymous"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$',  right: '$',  display: false}
+      ],
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    });"
+  ></script>
+</head>
+<body>
+  {{ content }}
+</body>
+</html>
